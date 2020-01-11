@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Platform.tscn" type="PackedScene" id=1]
+
+[sub_resource type="PhysicsMaterial" id=2]
+bounce = 0.2
+
+[sub_resource type="SphereShape" id=1]
+radius = 0.274925
+
+[node name="3DWorld" type="Spatial"]
+
+[node name="Ball" type="RigidBody" parent="."]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.18064, 0 )
+physics_material_override = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Ball"]
+shape = SubResource( 1 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Ball/CollisionShape"]
+radius = 0.204832
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.994743, 0.102402, 0, -0.102402, 0.994743, 0, 0.856911, 5.11099 )
+
+[node name="Platform" parent="." instance=ExtResource( 1 )]
+editor/display_folded = true
+
+[node name="EndPosition" parent="Platform" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.238907, 1.92035, 0.160035 )
+
+[node name="Platform2" parent="." instance=ExtResource( 1 )]
+editor/display_folded = true
+total_time = 5.0
+is_active = false
+
+[node name="EndPosition" parent="Platform2" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.76321, -0.533917, 0 )
+
+[node name="Platform3" parent="." instance=ExtResource( 1 )]
+editor/display_folded = true
+mode = 0
+
+[node name="EndPosition" parent="Platform3" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.88929, -0.600229, 0 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.456654, 0.889644, 0, -0.889644, 0.456654, 13.3405, 4.7961, 0 )
+shadow_enabled = true
+
+[editable path="Platform"]
+
+[editable path="Platform2"]
+
+[editable path="Platform3"]
