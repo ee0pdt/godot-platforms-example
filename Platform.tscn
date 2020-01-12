@@ -1,9 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Platform.gd" type="Script" id=1]
-
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 1.03825, 0.060769, 0.995253 )
+[ext_resource path="res://PlatformGeometry.tscn" type="PackedScene" id=2]
 
 [node name="Platform" type="Spatial"]
 script = ExtResource( 1 )
@@ -11,12 +9,10 @@ script = ExtResource( 1 )
 [node name="StartPosition" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.999898, 0.0143062, 0, -0.0143062, 0.999898, 0, 0, 0 )
 
+[node name="PlatformGeometry" parent="StartPosition" instance_placeholder="res://PlatformGeometry.tscn"]
+
 [node name="EndPosition" type="Spatial" parent="."]
 
-[node name="Mesh" type="CSGBox" parent="."]
-height = 0.1
+[node name="PlatformGeometry" parent="EndPosition" instance_placeholder="res://PlatformGeometry.tscn"]
 
-[node name="StaticBody" type="StaticBody" parent="Mesh"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Mesh/StaticBody"]
-shape = SubResource( 1 )
+[node name="Geometry" parent="." instance=ExtResource( 2 )]
