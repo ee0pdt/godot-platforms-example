@@ -1,12 +1,12 @@
 [gd_scene load_steps=2 format=2]
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 1.03825, 0.060769, 0.995253 )
 
 [node name="PlatformGeometry" type="CSGBox"]
 height = 0.1
 
-[node name="StaticBody" type="StaticBody" parent="."]
+[node name="KinematicBody" type="KinematicBody" parent="."]
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
-shape = SubResource( 1 )
+[node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
+shape = SubResource( 2 )
