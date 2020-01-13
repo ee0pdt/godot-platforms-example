@@ -18,7 +18,6 @@ var initial_position: Vector3
 var end_vector: Vector3
 var start_vector: Vector3
 var direction_vector: Vector3
-var geometry_node: Node
 
 # Settings available in Editor
 export(float) var total_time = 2
@@ -33,38 +32,36 @@ func _ready():
     _initialize()
 
 func _onetime_setup():
-    geometry_node = $Geometry
     if !platform_scene:
         return
-        
-    # Get the old placeholder node
-    var old_node = geometry_node
+    
+    # Swap platform geometry if applicable
+    _replace_node(self, $Geometry, platform_scene.instance())
+    
+    # Only replace these in Editor mode
+    if Engine.editor_hint:
+        _replace_node($StartPosition, $StartPosition/Geometry, platform_scene.instance())
+        _replace_node($EndPosition, $EndPosition/Geometry, platform_scene.instance())
 
-    # Create new node
-    var new_node = platform_scene.instance()
-
-    # Add the new node to the tree, under the same parent
-    self.add_child(new_node)
-
-    # Move it to same order within children
-    #self.move_child(new_node, old_node.index)
+func _replace_node(target_node, old_node, new_node):
+     # Add the new node to the tree, under the same parent
+    target_node.add_child(new_node)
+    
+    # Remove it from the tree
+    target_node.remove_child(old_node)
 
     # Set properties you want to be the same
     new_node.name = old_node.name
     new_node.translation = old_node.translation
     new_node.rotation = old_node.rotation
     new_node.scale = old_node.scale
-    geometry_node = new_node
-    
-    print(new_node)
-    
-    # Remove it from the tree
-    self.remove_child(old_node)
 
     # Destroy it (not immediately, some code might still use it)
     old_node.call_deferred("free")
+    
         
 func _initialize():
+    var geometry_node = $Geometry
     time_passed = 0
     start_vector = $StartPosition.translation
     end_vector = $EndPosition.translation
@@ -83,6 +80,7 @@ func _process(delta):
         _process_movement(delta)
 
 func _process_movement(delta):
+    var geometry_node = $Geometry
     time_passed = time_passed + delta
     var percent_complete = time_passed / total_time
     # Hack for bug in editor - better solution?

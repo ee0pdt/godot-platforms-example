@@ -9,10 +9,10 @@ script = ExtResource( 1 )
 [node name="StartPosition" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.999898, 0.0143062, 0, -0.0143062, 0.999898, 0, 0, 0 )
 
-[node name="PlatformGeometry" parent="StartPosition" instance_placeholder="res://PlatformGeometry.tscn"]
+[node name="Geometry" parent="StartPosition" instance_placeholder="res://PlatformGeometry.tscn"]
 
 [node name="EndPosition" type="Spatial" parent="."]
 
-[node name="PlatformGeometry" parent="EndPosition" instance_placeholder="res://PlatformGeometry.tscn"]
+[node name="Geometry" parent="EndPosition" instance_placeholder="res://PlatformGeometry.tscn"]
 
 [node name="Geometry" parent="." instance=ExtResource( 2 )]
