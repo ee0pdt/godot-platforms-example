@@ -29,19 +29,58 @@ transform = Transform( 1, 0, 0, 0, 0.456654, 0.889644, 0, -0.889644, 0.456654, 1
 shadow_enabled = true
 
 [node name="Platform" parent="." instance=ExtResource( 1 )]
-current_target = 1
 
 [node name="EndPosition" parent="Platform" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.47213, 0 )
 
 [node name="Geometry" parent="Platform" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.43989, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1578, 0 )
 
 [node name="Platform2" parent="." instance=ExtResource( 1 )]
+mode = 0
+is_active = false
 platform_scene = ExtResource( 2 )
+animate_in_editor = true
 
 [node name="EndPosition" parent="Platform2" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.39133, 0, 0 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = 114.0
+margin_top = 514.0
+margin_right = 334.0
+margin_bottom = 571.0
+text = "Activate 2nd Platform"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 389.0
+margin_top = 511.0
+margin_right = 609.0
+margin_bottom = 568.0
+rect_pivot_offset = Vector2( 181.8, 31.6 )
+text = "Set target Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button3" type="Button" parent="."]
+anchor_top = -0.00333333
+anchor_bottom = -0.00333333
+margin_left = 663.0
+margin_top = 507.0
+margin_right = 883.0
+margin_bottom = 564.0
+rect_pivot_offset = Vector2( 181.8, 31.6 )
+text = "Set target end"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Button" to="Platform2" method="_set_is_active" binds= [ true ]]
+[connection signal="pressed" from="Button2" to="Platform2" method="_set_current_target" binds= [ 0 ]]
+[connection signal="pressed" from="Button3" to="Platform2" method="_set_current_target" binds= [ 1 ]]
 
 [editable path="Platform"]
 
