@@ -26,6 +26,6 @@ Whether the platform is initially active
 
 ## TODO:
 
-1. Add signals to enable platform start/stop
-2. Add tweening options
-3. Non-linear paths???
+[x] Add signals to enable platform start/stop
+[ ] Add tweening options
+[ ] Non-linear paths???
