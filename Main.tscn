@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Platform.tscn" type="PackedScene" id=1]
-[ext_resource path="res://ReplacementPlatformGeometry.tscn" type="PackedScene" id=2]
-[ext_resource path="res://player.scn" type="PackedScene" id=3]
+[ext_resource path="res://Square Platform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ReplacementPlatformGeometry.tscn" type="PackedScene" id=3]
+[ext_resource path="res://player.scn" type="PackedScene" id=4]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.2
@@ -13,13 +14,14 @@ radius = 0.274925
 [node name="3DWorld" type="Spatial"]
 
 [node name="Ball" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.18064, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.16676, 4.18064, 0 )
 physics_material_override = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Ball"]
 shape = SubResource( 2 )
 
 [node name="CSGSphere" type="CSGSphere" parent="Ball/CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.155854, 0, 0 )
 radius = 0.204832
 
 [node name="Camera" type="Camera" parent="."]
@@ -30,17 +32,21 @@ transform = Transform( 1, 0, 0, 0, 0.456654, 0.889644, 0, -0.889644, 0.456654, 1
 shadow_enabled = true
 
 [node name="Platform" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 1.07861, 0 )
+total_time = 4.0
+platform_scene = ExtResource( 2 )
+animate_in_editor = true
+
+[node name="StartPosition" parent="Platform" index="0"]
+transform = Transform( 1, 0, 0, 0, 0.999898, 0.0143062, 0, -0.0143062, 0.999898, 0, 1.62496, 0 )
 
 [node name="EndPosition" parent="Platform" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.47213, 0 )
-
-[node name="Geometry" parent="Platform" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1578, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.59888, 0 )
 
 [node name="Platform2" parent="." instance=ExtResource( 1 )]
 mode = 0
 is_active = false
-platform_scene = ExtResource( 2 )
+platform_scene = ExtResource( 3 )
 animate_in_editor = true
 
 [node name="StartPosition" parent="Platform2" index="0"]
@@ -71,8 +77,6 @@ __meta__ = {
 }
 
 [node name="Button3" type="Button" parent="."]
-anchor_top = -0.00333333
-anchor_bottom = -0.00333333
 margin_left = 663.0
 margin_top = 507.0
 margin_right = 883.0
@@ -83,8 +87,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="player" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142376, 4.12433, -0.0653076 )
+[node name="player" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142376, 5.34465, -0.0653076 )
 
 [node name="Platform3" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2163, 0, 0 )

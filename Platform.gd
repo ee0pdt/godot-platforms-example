@@ -21,9 +21,9 @@ var direction_vector: Vector3
 
 # Settings available in Editor
 export(float) var total_time = 2
-export(TARGET) var current_target = TARGET.end
-export(MODE) var mode = MODE.auto
-export(bool) var is_active = true
+export(TARGET) var current_target = TARGET.end setget _set_current_target
+export(MODE) var mode = MODE.auto setget _set_mode
+export(bool) var is_active = true setget _set_is_active
 export(PackedScene) var platform_scene
 export(bool) var animate_in_editor = false
 
@@ -75,7 +75,7 @@ func _initialize():
             direction_vector = start_vector - current_vector
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
     # If editor animations are turned off, exit here
     if Engine.editor_hint && !animate_in_editor:
         return
@@ -108,6 +108,11 @@ func _toggle_active():
 
 func _set_is_active(val: bool):
     is_active = val
+
+func _set_mode(val: int):
+    if val != MODE.auto and val != MODE.manual:
+        return
+    mode = val
 
 func _set_current_target(target: int):
     # We can't currently use an enum as a type in GDScript so need to check here
